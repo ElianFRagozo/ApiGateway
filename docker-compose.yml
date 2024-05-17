@@ -1,0 +1,54 @@
+version: '4.8'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports: 
+      - "5258:5258"
+      - "5259:5259"
+    networks:
+      - proxybackend
+
+  BackendNotas:
+    image: ${DOCKER_REGISTRY-}backendnotas
+    build:
+      context: .
+      dockerfile: C:/Users/elian/source/repos/BackendNotas/Dockerfile
+    ports: 
+      - "5284:5284"
+      - "5285:5284"
+    networks:
+      - proxybackend
+
+  BackendUsuario:
+    image: ${DOCKER_REGISTRY-}backendusuarios
+    build:
+      context: .
+      dockerfile: C:/Users/elian/source/repos/BackendUsuario/Dockerfile
+    ports: 
+      - "5140:5140"
+      - "5141:5141"
+    networks:
+      - proxybackend
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - proxybackend
+
+networks:
+  proxybackend:
+    name: proxybackend
+    driver: bridge
+
+        
+
+    
+       
+  
+
